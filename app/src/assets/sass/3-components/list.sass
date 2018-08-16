@@ -1,0 +1,36 @@
+#tracks, #artists
+  flex-grow: 1
+  width: 100%
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  .head
+    display: flex
+    justify-content: space-between
+    align-items: center
+    flex-direction: row
+    width: 100%
+    max-width: 1004px
+    padding: 32px
+    box-sizing: border-box
+
+    h2
+      font-size: 36px
+      font-weight: bold
+      text-transform: uppercase
+      margin: 32px 0
+
+  .tracks-container, .artists-container
+    width: 100%
+    max-width: 1004px
+
+@media #{$xs-sm}
+  #tracks, #artists
+    .head
+      flex-direction: column
+
+      h2
+        margin: 0 32px 32px
+
+@import 'styles/4-animations/list'

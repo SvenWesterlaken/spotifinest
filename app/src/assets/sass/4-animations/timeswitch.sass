@@ -1,0 +1,16 @@
+.timeswitch .time-container span.time
+
+  &.right-enter, &.left-leave-to
+    transform: translateX($time-width)
+    opacity: 0
+
+  &.right-enter-to, &.right-leave, &.left-enter-to, &.left-leave
+    transform: translateX(0)
+    opacity: 1
+
+  &.left-enter, &.right-leave-to
+    transform: translateX(-$time-width)
+    opacity: 0
+
+  &.right-enter-active, &.left-enter-active, &.right-leave-active, &.left-leave-active
+    transition: transform 500ms cubic-bezier(0.4, 0.0, 0.2, 1), opacity 150ms cubic-bezier(0.455, 0.03, 0.515, 0.955)

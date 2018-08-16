@@ -1,0 +1,62 @@
+.tracklist-enter, .artistlist-enter
+  .image-container
+    .cover
+      opacity: 0
+      transform: scale(0)
+
+    .heading
+      padding: 0
+      transform: scaleX(0)
+
+      span
+        opacity: 0
+
+  .info-container
+    opacity: 0
+    transform: scaleX(0)
+    padding: 0
+
+    .top-container
+      span.title
+        opacity: 0
+
+      span.duration, span.followers
+        opacity: 0
+
+    .bottom-container
+      button.btn
+        transform: scale(0)
+        opacity: 0
+
+.tracklist-enter-active, .artistlist-enter-active
+  transition: all 1.6s
+
+  .image-container
+    .cover
+      transition: opacity #{$opacity-duration}ms $opacity-easing #{$standard-delay}ms, transform #{$scale-duration}ms $scale-easing #{$standard-delay}ms
+
+    .heading
+      transition: all #{$scale-duration}ms $scale-easing #{$standard-delay}ms
+
+      span
+        transition: all #{$opacity-duration + 200}ms $opacity-easing #{$text-delay}ms
+
+  .info-container
+    transition: opacity #{$opacity-duration}ms $opacity-easing #{$container-delay}ms, transform #{$container-duration}ms #{$container-delay}ms
+
+    .top-container
+      span.title
+        transition: all #{$opacity-duration}ms $opacity-easing #{$container-items-delay}ms
+
+      span.duration, span.followers
+        transition: all #{$opacity-duration}ms $opacity-easing #{$container-items-delay}ms
+
+    .bottom-container
+      button.btn
+        transition: opacity #{$opacity-duration}ms $opacity-easing #{$container-items-delay}ms, transform #{$scale-duration / 2}ms $scale-easing #{$container-items-delay}ms
+
+.tracklist-leave-to, .artistlist-leave-to
+  opacity: 0
+
+.tracklist-leave-active, .artistlist-leave-active
+  transition: all #{$standard-delay - 100}ms $opacity-easing

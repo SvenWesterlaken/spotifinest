@@ -1,0 +1,30 @@
+.back-to-top-button
+  height: 48px
+  width: 48px
+  background: $accent
+  display: flex
+  justify-content: center
+  align-items: center
+  position: fixed
+  bottom: 32px
+  right: 32px
+  border-radius: 50%
+  cursor: pointer
+  z-index: 5
+
+  .chevron-up
+    height: 36px
+    width: 36px
+
+    svg path
+      fill: $text-contrast
+
+.back-to-top-enter, .back-to-top-leave-to
+  opacity: 0
+  transform: scale(0)
+
+.back-to-top-enter-active
+  transition: transform #{$scale-duration / 2}ms $scale-easing, opacity #{$opacity-duration}ms $opacity-easing
+
+.back-to-top-leave-active
+  transition: transform #{$scale-duration / 2}ms cubic-bezier(0.4, 0.0, 1, 1), opacity #{$opacity-duration}ms $opacity-easing

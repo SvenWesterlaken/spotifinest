@@ -1,0 +1,71 @@
+.popularity-bar
+  display: flex
+  align-items: center
+
+  span.info
+    font-size: 20px
+    font-weight: 600
+    color: $accent
+    text-transform: uppercase
+
+    &.popularityspan-enter
+      opacity: 0
+
+    &.popularityspan-enter-active
+      transition: all #{$opacity-duration}ms $opacity-easing #{$container-items-delay}ms
+
+  .popularity-dot-container
+    display: flex
+    align-items: center
+    margin: 0 4px
+
+    .popularity-dot
+      height: 16px
+      width: 16px
+      border-radius: 50%
+      border: 3px solid $text
+      box-sizing: border-box
+      margin: 0 4px
+      position: relative
+
+      &.filled
+        background: $accent
+        border: none
+
+      @for $i from 1 through 10
+        &.dot-#{$i}
+          &.popularitylist-enter
+            transform: scale(0)
+            opacity: 0
+
+          $delay: #{$i * 50 + $container-items-delay}ms
+
+          &.popularitylist-enter-active
+            transition: opacity #{$opacity-duration}ms $opacity-easing $delay, transform #{$scale-duration}ms $scale-easing $delay
+
+  &.mobile
+    flex-grow: 1
+    margin-left: 16px
+    display: flex
+    justify-content: flex-end
+
+    .popularity-pill
+      height: 16px
+      width: 4px
+      background: $text-secondary
+      border-radius: 2px
+      margin: 0 1px
+
+      &.filled
+        background: $accent
+
+      @for $i from 1 through 10
+        &.pill-#{$i}
+          &.popularitylist-enter
+            transform: scale(0)
+            opacity: 0
+
+          $delay: #{$i * 50 + $container-items-delay}ms
+
+          &.popularitylist-enter-active
+            transition: opacity #{$opacity-duration}ms $opacity-easing $delay, transform #{$scale-duration}ms $scale-easing $delay

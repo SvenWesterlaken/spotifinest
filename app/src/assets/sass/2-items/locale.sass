@@ -1,0 +1,25 @@
+.locale-changer
+  cursor: pointer
+
+  span
+    color: $text-secondary
+    text-transform: uppercase
+    display: block
+    transition: all 0.3s ease-in-out
+    font-weight: 600
+    user-select: none
+
+    &.fade-enter, &.fade-leave-to
+      opacity: 0
+
+    &.fade-enter-active, &.fade-leave-active
+      transition: all 200ms ease-in-out
+
+  &.fixed
+    position: fixed
+    right: 32px
+    top: 32px
+
+  &:hover, &:active
+    span
+      color: $accent

@@ -1,0 +1,177 @@
+@import 'styles/2-items/hamburger'
+
+#header
+  width: 100%
+  display: flex
+  justify-content: center
+  align-items: center
+
+  header
+    height: 56px
+    width: 100%
+    max-width: 1004px
+    margin: 32px 32px 0
+    background: $text
+    border-radius: 28px
+    display: flex
+    justify-content: space-between
+    align-items: center
+    text-transform: uppercase
+    z-index: 10
+
+    .content-container
+      width: 33.33333333%
+      padding: 0 16px
+
+      &.left
+        text-align: left
+
+      &.middle
+        text-align: center
+
+      &.right
+        text-align: right
+        display: flex
+        justify-content: flex-end
+
+      h1
+        margin: 0
+        padding: 0
+        display: inline-flex
+        color: $accent
+        font-size: 24px
+        position: relative
+        cursor: pointer
+
+        &::after
+          content: ''
+          position: absolute
+          bottom: -5px
+          left: 0
+          width: 100%
+          height: 3px
+          border-radius: 1.5px
+          background: $accent
+          transform: scaleX(0)
+          visibility: hidden
+          transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1), visibility 500ms, background 500ms ease-in-out
+
+        &:hover, &:active
+          color: $hover-accent
+          transition: all 500ms ease-in-out
+
+          &::after
+            visibility: visible
+            transform: scaleX(1)
+            background: $hover-accent
+
+      a, .locale-changer span, a:visited
+        color: $text-contrast
+        text-decoration: none
+        font-weight: 600
+        margin: 0 16px
+        position: relative
+        cursor: pointer
+
+        &::after
+          content: ''
+          position: absolute
+          bottom: -5px
+          left: 0
+          width: 100%
+          height: 3px
+          border-radius: 1.5px
+          background: $text-contrast
+          transform: scaleX(0)
+          visibility: hidden
+          transition: all 500ms cubic-bezier(0.23, 1, 0.32, 1)
+
+        &:hover, &:active
+          &::after
+            visibility: visible
+            transform: scaleX(1)
+
+    &.mobile
+      margin: 0
+      border-radius: 0 0 16px 16px
+      justify-content: flex-start
+      position: fixed
+      top: 0
+      left: 0
+
+      button.hamburger
+        outline: none
+        padding: 20px 16px 16px
+        position: absolute
+        top: 0
+        left: 0
+
+      .title-container
+        flex-grow: 1
+        margin: 0
+        padding: 0
+        display: flex
+        justify-content: center
+        align-items: center
+        padding: 0 56px
+
+        h1
+          color: $accent
+          font-size: 24px
+          position: relative
+          cursor: pointer
+          margin: 0
+          padding: 0
+          display: inline-block
+          text-align: center
+          transition: all 0.3s ease-in-out
+
+          &:hover, &:active
+            color: $hover-accent
+
+      .locale-changer
+        position: absolute
+        top: 18px
+        right: 32px
+        line-height: 20px
+
+        span
+          color: $text-contrast
+
+  nav
+    position: fixed
+    left: 0
+    top: 0
+    background: $background
+    z-index: 8
+    display: block
+    width: 100%
+    max-width: 320px
+    height: 100%
+    box-sizing: border-box
+    backface-visibility: hidden
+
+    .inner-nav-container
+      width: 100%
+      height: 100vh
+      margin: 88px 32px 82px
+      box-sizing: border-box
+
+    a.nav-item
+      font-size: 30px
+      text-decoration: none
+      font-weight: 600
+      margin: 32px 0
+      display: block
+      color: $text
+      transition: all 0.3s ease-in-out
+      cursor: pointer
+
+      &:hover, &:active
+        color: $accent
+
+    &.nav-enter
+      transform: translateX(-100%)
+
+    &.nav-enter-active
+      transition: all 600ms cubic-bezier(0.23, 1, 0.32, 1)

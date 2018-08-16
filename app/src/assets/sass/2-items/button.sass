@@ -1,0 +1,33 @@
+.btn
+  background: $accent
+  cursor: pointer
+  border: none
+  border-radius: 18px
+  height: 36px
+  padding: 0 32px
+  color: $text-contrast
+  font-weight: bold
+  font-size: 16px
+  text-transform: uppercase
+  transition: all 300ms ease-in-out
+  outline: none
+  box-sizing: border-box
+
+  &.outlined
+    background: none
+    border: 3px solid $accent
+    color: $accent
+
+    &:hover, &:active
+      background: $accent
+      color: $text-contrast
+      outline: none
+
+  &.large
+    height: 48px
+    font-size: 18px
+    border-radius: 24px
+
+  &:hover, &:active
+    background: $hover-accent
+    outline: none

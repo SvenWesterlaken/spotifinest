@@ -1,0 +1,165 @@
+.track-item, .artist-item
+  display: flex
+  align-items: center
+  margin: 0 16px 32px
+
+  .image-container
+    position: relative
+    z-index: 2
+
+    .cover
+      height: 192px
+      width: 192px
+      background-repeat: no-repeat
+      background-position: center
+      background-size: cover
+      border-radius: 14px
+
+    .heading
+      height: 28px
+      width: 56px
+      overflow: hidden
+      box-sizing: border-box
+      padding: 0 16px
+      position: absolute
+      top: 16px
+      left: -16px
+      background: $accent
+      line-height: 28px
+      font-size: 16px
+      font-weight: 600
+      color: $text-contrast
+      text-transform: uppercase
+      border-radius: 14px
+      transform-origin: left
+
+  .info-container
+    height: 160px
+    width: 100%
+    background: $background
+    z-index: 1
+    padding: 16px 24px
+    box-sizing: border-box
+    border-radius: 24px
+    display: flex
+    flex-direction: column
+    justify-content: center
+    overflow: hidden
+    margin-left: -24px
+    padding-left: 48px
+    text-align: left
+    transform-origin: left
+
+    .top-container
+      display: flex
+      justify-content: space-between
+
+      span.title
+        font-size: 26px
+        font-weight: 600
+        margin: 0 16px 32px 0
+        line-height: 26px
+
+      span.duration, span.followers
+        line-height: 26px
+        font-size: 20px
+        font-weight: 600
+        margin: 0 8px 32px
+        color: $text-secondary
+
+        span.amount
+          color: $accent-secondary
+
+    .bottom-container
+      align-items: center
+      @extend .top-container
+
+@media #{$sm}
+  $item-height: 128px
+
+  .track-item, .artist-item
+    margin: 0 16px 16px
+
+    .image-container
+      .cover
+        height: $item-height
+        width: $item-height
+
+      .heading
+        height: 24px
+        width: 48px
+        padding-left: 8px
+        top: 12px
+        left: -8px
+        line-height: 24px
+        font-size: 14px
+        border-radius: 16px
+
+    .info-container
+      height: $item-height
+      margin-left: -#{$item-height}
+      padding: 16px 16px 16px #{$item-height + 16px}
+      justify-content: space-between
+      border-radius: 16px
+
+      .top-container
+
+        span.title
+          margin: 0 16px 4px 0
+          font-size: 16px
+          line-height: 16px
+
+        span.duration, span.followers
+          font-size: 14px
+          line-height: 14px
+          margin: 0 0 0 16px
+
+@media #{$xs}
+  $item-height: 104px
+
+  .track-item, .artist-item
+    margin: 0 16px 16px
+
+    .image-container
+      .cover
+        height: $item-height
+        width: $item-height
+
+      .heading
+        height: 24px
+        width: 48px
+        padding-left: 8px
+        top: 12px
+        left: -8px
+        line-height: 24px
+        font-size: 14px
+        border-radius: 16px
+
+    .info-container
+      height: $item-height
+      margin-left: -#{$item-height}
+      padding: 8px 16px 8px #{$item-height + 16px}
+      justify-content: space-between
+      border-radius: 16px
+
+      .top-container
+        flex-direction: column
+
+        span.title
+          margin: 0 0 4px
+          font-size: 14px
+          line-height: 14px
+
+        span.duration, span.followers
+          font-size: 12px
+          line-height: 12px
+          margin: 0
+          font-weight: normal
+
+      .bottom-container
+        flex-direction: row
+
+        button.btn
+          height: 24px
+          font-size: 12px
+          padding: 0 16px

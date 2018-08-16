@@ -1,0 +1,163 @@
+$checked-color: $accent
+$unchecked-color: $text
+$checkbox-height: 18px
+$duration: 200ms
+
+.checkbox-container
+  display: flex
+  align-items: center
+
+  span
+    margin: 0 0 4px 8px
+    cursor: pointer
+    color: $text
+    font-weight: 600
+    user-select: none
+
+  .checkbox
+
+    input[type=checkbox]
+      display: none
+
+      &:checked + label
+        border-color: $checked-color
+        transition: border-color ease-in-out $duration
+
+        &::after
+          height: $checkbox-height * .5
+          animation: 'dothabottomcheck' $duration/2 ease 0s forwards
+
+        &::before
+          height: $checkbox-height * 1.2
+          animation: 'dothatopcheck' $duration ease 0s forwards
+
+
+    label
+      height: $checkbox-height
+      width: $checkbox-height
+      background-color: transparent
+      border: $checkbox-height * .1 solid $unchecked-color
+      border-radius: $checkbox-height
+      position: relative
+      display: inline-block
+      box-sizing: border-box
+      transition: border-color ease-in-out $duration/2
+      cursor: pointer
+
+      &::before, &::after
+        box-sizing: border-box
+        position: absolute
+        height: 0
+        width: $checkbox-height * .2
+        background-color: $checked-color
+        display: inline-block
+        transform-origin: left top
+        border-radius: 5px
+        content: ' '
+        transition: opacity ease .5
+
+      &::before
+        top: $checkbox-height * .72
+        left: $checkbox-height * .41
+        box-shadow: 0 0 0 $checkbox-height * .05 $background
+        transform: rotate(-135deg)
+
+      &::after
+        top: $checkbox-height * .37
+        left: $checkbox-height * .05
+        transform: rotate(-45deg)
+
+@keyframes dothabottomcheck
+  0%
+    height: 0
+  100%
+    height: $checkbox-height / 2
+
+@keyframes dothatopcheck
+  0%
+    height: 0
+  50%
+    height: 0
+  100%
+    height: $checkbox-height
+
+@media #{$xs}
+  $checkbox-height: 16px
+
+  .checkbox-container
+    display: flex
+    align-items: center
+
+    span
+      margin: 0 0 4px 8px
+      cursor: pointer
+      color: $text
+      font-weight: 600
+      user-select: none
+
+    .checkbox
+
+      input[type=checkbox]
+        display: none
+
+        &:checked + label
+          border-color: $checked-color
+          transition: border-color ease-in-out $duration
+
+          &::after
+            height: $checkbox-height * .5
+            animation: 'dothabottomcheck' $duration/2 ease 0s forwards
+
+          &::before
+            height: $checkbox-height * 1.2
+            animation: 'dothatopcheck' $duration ease 0s forwards
+
+
+      label
+        height: $checkbox-height
+        width: $checkbox-height
+        background-color: transparent
+        border: $checkbox-height * .1 solid $unchecked-color
+        border-radius: $checkbox-height
+        position: relative
+        display: inline-block
+        box-sizing: border-box
+        transition: border-color ease-in-out $duration/2
+        cursor: pointer
+
+        &::before, &::after
+          box-sizing: border-box
+          position: absolute
+          height: 0
+          width: $checkbox-height * .2
+          background-color: $checked-color
+          display: inline-block
+          transform-origin: left top
+          border-radius: 5px
+          content: ' '
+          transition: opacity ease .5
+
+        &::before
+          top: $checkbox-height * .72
+          left: $checkbox-height * .41
+          box-shadow: 0 0 0 $checkbox-height * .05 $background
+          transform: rotate(-135deg)
+
+        &::after
+          top: $checkbox-height * .37
+          left: $checkbox-height * .05
+          transform: rotate(-45deg)
+
+  @keyframes dothabottomcheck
+    0%
+      height: 0
+    100%
+      height: $checkbox-height / 2
+
+  @keyframes dothatopcheck
+    0%
+      height: 0
+    50%
+      height: 0
+    100%
+      height: $checkbox-height
