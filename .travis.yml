@@ -27,8 +27,7 @@ install:
 before_script:
   - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
   - docker-compose pull
-  - docker-compose build
-  - docker-compose up -d
+  - docker-compose up -d --build
   - docker-compose ps
 
 script:
