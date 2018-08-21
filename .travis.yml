@@ -6,37 +6,40 @@ branches:
 
 sudo: required
 
+language: node_js
+
+node_js:
+  - "stable"
+
+notifications:
+  email: false
+
 services:
   - docker
 
-before_install:
+install:
   - cd ./app
-  - npm install
+  - npm install mkdirp@latest
+  - npm install --only=dev
+  - npm run build
   - cd ..
 
 before_script:
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
   - docker-compose pull
-  - docker-compose build
-  - docker-compose start
+  - docker-compose up -d --build
   - docker-compose ps
-
+  - chmod +x test_curl.sh
 
 script:
-  - "curl -H 'Host: spotifinest.svenwesterlaken.nl' http://localhost" || exit 1
-  - "curl -H 'Host: spotifinest-api.svenwesterlaken.nl' http://localhost" || exit 1
+  - ./test_curl.sh
 
-after_script:
+after_succes:
   - docker image build -t "${REGISTRY_USER}/spotifinest" ./app
   - docker image build -t "${REGISTRY_USER}/spotifinest-api" ./api
-
-before_deploy:
-  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
 
 deploy:
   provider: script
   script: docker image push "${REGISTRY_USER}/spotifinest" && docker image push "${REGISTRY_USER}/spotifinest-api"
   on:
     branch: master
-
-notifications:
-  email: false
