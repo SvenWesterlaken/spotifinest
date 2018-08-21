@@ -19,7 +19,7 @@ services:
 
 install:
   - cd ./app
-  - npm install =only-dev
+  - npm install --only=dev
   - cd ..
 
 before_script:
