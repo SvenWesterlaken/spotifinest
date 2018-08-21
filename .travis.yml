@@ -6,7 +6,10 @@ branches:
 
 sudo: required
 
-language: generic
+language: node_js
+
+node_js:
+  - "stable"
 
 notifications:
   email: false
@@ -14,9 +17,9 @@ notifications:
 services:
   - docker
 
-before_install:
+install:
   - cd ./app
-  - npm install
+  - npm install =only-dev
   - cd ..
 
 before_script:
@@ -24,7 +27,6 @@ before_script:
   - docker-compose build
   - docker-compose start
   - docker-compose ps
-
 
 script:
   - "curl -H 'Host: spotifinest.svenwesterlaken.nl' http://localhost" || exit 1
