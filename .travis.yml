@@ -1,0 +1,42 @@
+branches:
+  only:
+    - master
+    - feature/ci
+    - /^.*travis.*$/
+
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - cd ./app
+  - npm install
+  - cd ..
+
+before_script:
+  - docker-compose pull
+  - docker-compose build
+  - docker-compose start
+  - docker-compose ps
+
+
+script:
+  - "curl -H 'Host: spotifinest.svenwesterlaken.nl' http://localhost" || exit 1
+  - "curl -H 'Host: spotifinest-api.svenwesterlaken.nl' http://localhost" || exit 1
+
+after_script:
+  - docker image build -t "${REGISTRY_USER}/spotifinest" ./app
+  - docker image build -t "${REGISTRY_USER}/spotifinest-api" ./api
+
+before_deploy:
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+
+deploy:
+  provider: script
+  script: docker image push "${REGISTRY_USER}/spotifinest" && docker image push "${REGISTRY_USER}/spotifinest-api"
+  on:
+    branch: master
+
+notifications:
+  email: false
