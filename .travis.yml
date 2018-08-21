@@ -34,7 +34,7 @@ before_script:
 script:
   - ./test_curl.sh
 
-after_succes:
+after_success:
   - docker image build -t "${REGISTRY_USER}/spotifinest" ./app
   - docker image build -t "${REGISTRY_USER}/spotifinest-api" ./api
 
