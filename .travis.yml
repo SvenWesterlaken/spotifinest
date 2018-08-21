@@ -6,6 +6,11 @@ branches:
 
 sudo: required
 
+language: generic
+
+notifications:
+  email: false
+
 services:
   - docker
 
@@ -37,6 +42,3 @@ deploy:
   script: docker image push "${REGISTRY_USER}/spotifinest" && docker image push "${REGISTRY_USER}/spotifinest-api"
   on:
     branch: master
-
-notifications:
-  email: false
