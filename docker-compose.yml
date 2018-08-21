@@ -1,23 +1,21 @@
 version: "3.1"
 
 services:
-    nginx-proxy:
-        image: jwilder/nginx-proxy
-        ports:
-            - "80:80"
-        volumes:
-            - /var/run/docker.sock:/tmp/docker.sock:ro
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
 
-    spotifinest:
-        image: spotifinest
-        build: ./app
-        environment:
-            - VIRTUAL_HOST=spotifinest.svenwesterlaken.nl
+  spotifinest:
+    build: ./app
+    environment:
+      - VIRTUAL_HOST=spotifinest.svenwesterlaken.nl
 
-    api:
-        image: spotifinest-api
-        build: ./api
-        environment:
-            - FRONTEND_CB_URI=http://spotifinest.svenwesterlaken.nl/callback
-            - VIRTUAL_HOST=spotifinest-api.svenwesterlaken.nl
-            - VIRTUAL_PORT=8000
+  api:
+    build: ./api
+    environment:
+      - FRONTEND_CB_URI=http://spotifinest.svenwesterlaken.nl/callback
+      - VIRTUAL_HOST=spotifinest-api.svenwesterlaken.nl
+      - VIRTUAL_PORT=8000
