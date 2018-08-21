@@ -29,6 +29,7 @@ before_script:
   - docker-compose pull
   - docker-compose up -d --build
   - docker-compose ps
+  - chmod +x test_curl.sh
 
 script:
   - ./test_curl.sh
