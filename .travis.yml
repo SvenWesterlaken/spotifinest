@@ -24,6 +24,7 @@ install:
   - cd ..
 
 before_script:
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
   - docker-compose pull
   - docker-compose build
   - docker-compose start
@@ -34,10 +35,7 @@ script:
 
 after_succes:
   - docker image build -t "${REGISTRY_USER}/spotifinest" ./app
-  - docker image build -t "${REGISTRY_USER}/spotifinest-api" ./api
-
-before_deploy:
-  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+  - docker image build -t "${REGISTRY_USER}/spotifinest-api" ./api  
 
 deploy:
   provider: script
