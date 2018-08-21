@@ -28,7 +28,7 @@ before_script:
   - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
   - docker-compose pull
   - docker-compose build
-  - docker-compose start
+  - docker-compose up -d
   - docker-compose ps
 
 script:
