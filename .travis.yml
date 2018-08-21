@@ -29,7 +29,7 @@ before_script:
   - docker-compose ps
 
 script:
-  - "curl -H 'Host: spotifinest.svenwesterlaken.nl' http://localhost" && curl -H 'Host: spotifinest-api.svenwesterlaken.nl' http://localhost"
+  - ./test_curl.sh
 
 after_succes:
   - docker image build -t "${REGISTRY_USER}/spotifinest" ./app
