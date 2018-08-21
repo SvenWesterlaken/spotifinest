@@ -17,10 +17,13 @@ notifications:
 services:
   - docker
 
-before_script:
+install:
   - cd ./app
+  - npm install mkdirp@latest
   - npm install --only=dev
   - cd ..
+
+before_script:
   - docker-compose pull
   - docker-compose build
   - docker-compose start
