@@ -2,7 +2,7 @@
   #app
     transition(name="fade", mode="out-in")
       app-header(v-if="headerShow")
-    .page-container
+    .page-container(:class="{padded: headerShow}")
       transition(name="fade", mode="out-in")
         router-view
 </template>
@@ -32,29 +32,4 @@ export default {
 }
 </script>
 
-<style lang="sass">
-@import styles/main
-
-#app
-  min-height: 100vh
-  display: flex
-  flex-direction: column
-  justify-content: center
-  align-items: center
-
-.page-container
-  flex-grow: 1
-  display: flex
-  width: 100%
-
-.fade-enter, .fade-leave-to
-  opacity: 0
-
-.fade-enter-active, .fade-leave-active
-  transition: all 400ms ease-in-out
-
-@media #{$nav}
-  .page-container
-    padding-top: 56px
-
-</style>
+<style lang="sass" src="styles/main"></style>

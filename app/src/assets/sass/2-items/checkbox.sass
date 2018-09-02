@@ -1,18 +1,28 @@
-$checked-color: $accent
-$unchecked-color: $text
+$checked-color: white
+$unchecked-color: $text-contrast-secondary
 $checkbox-height: 18px
+$checkbox-bg: transparent
 $duration: 200ms
 
 .checkbox-container
   display: flex
   align-items: center
+  text-transform: uppercase
+  padding: 11px 32px 8px
+  height: 40px
+  box-sizing: border-box
+  position: relative
 
   span
-    margin: 0 0 4px 8px
+    padding-bottom: 3px
+    margin-left: 8px
     cursor: pointer
-    color: $text
+    color: $text-contrast-secondary
     font-weight: 600
     user-select: none
+
+  &.checked span
+    color: white
 
   .checkbox
 
@@ -59,7 +69,7 @@ $duration: 200ms
       &::before
         top: $checkbox-height * .72
         left: $checkbox-height * .41
-        box-shadow: 0 0 0 $checkbox-height * .05 $background
+        box-shadow: 0 0 0 $checkbox-height * .05 $checkbox-bg
         transform: rotate(-135deg)
 
       &::after
@@ -87,13 +97,6 @@ $duration: 200ms
   .checkbox-container
     display: flex
     align-items: center
-
-    span
-      margin: 0 0 4px 8px
-      cursor: pointer
-      color: $text
-      font-weight: 600
-      user-select: none
 
     .checkbox
 
@@ -140,7 +143,7 @@ $duration: 200ms
         &::before
           top: $checkbox-height * .72
           left: $checkbox-height * .41
-          box-shadow: 0 0 0 $checkbox-height * .05 $background
+          box-shadow: 0 0 0 $checkbox-height * .05 $checkbox-bg
           transform: rotate(-135deg)
 
         &::after
