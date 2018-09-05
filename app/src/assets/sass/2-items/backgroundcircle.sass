@@ -1,0 +1,61 @@
+.background-circle
+  background:
+    image: linear-gradient(360deg, $gradient-top, $gradient-bottom)
+    size: cover
+    position: center
+    attachment: fixed
+  height: 100px
+  width: 100px
+  border-radius: 100%
+  position: fixed
+  z-index: 0
+  transform-origin: center
+  transition: transform 2s cubic-bezier(0.23, 1, 0.32, 1)
+
+  &::after, &::before
+    position: absolute
+    background:
+      image: linear-gradient(360deg, $gradient-top, $gradient-bottom)
+      size: cover
+      position: center
+      attachment: fixed
+    border-radius: 100%
+    z-index: 0
+
+  &#background-circle-1
+    height: 1000px
+    width: 1000px
+    top: -45%
+    left: 15%
+
+    &::after
+      content: ''
+      bottom: -18%
+      left: 20%
+      height: 300px
+      width: 300px
+
+    &::before
+      content: ''
+      bottom: -30%
+      left: 32%
+      height: 650px
+      width: 650px
+
+  &#background-circle-2
+    height: 600px
+    width: 600px
+    top: 5%
+    left: 90%
+
+  &#background-circle-3
+    height: 350px
+    width: 350px
+    top: 70%
+    left: 10%
+
+  &#background-circle-4
+    height: 500px
+    width: 500px
+    bottom: -20%
+    left: 60%

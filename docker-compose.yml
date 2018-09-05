@@ -13,9 +13,10 @@ services:
     environment:
       - VIRTUAL_HOST=spotifinest.svenwesterlaken.nl
 
-  api:
+  spotifinest-api:
     build: ./api
     environment:
       - FRONTEND_CB_URI=http://spotifinest.svenwesterlaken.nl/callback
+      - REDIRECT_URI=http://spotifinest-api.svenwesterlaken.nl/callback
       - VIRTUAL_HOST=spotifinest-api.svenwesterlaken.nl
       - VIRTUAL_PORT=8000
