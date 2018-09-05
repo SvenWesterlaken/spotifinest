@@ -22,7 +22,7 @@ export default {
     }
   },
   mounted () {
-    this.multiplier = -1 * _.random(30, 50)
+    this.multiplier = -1 * _.random(50, 80)
     this.getOffset()
     window.addEventListener('resize', _.debounce(this.getOffset, 50))
   },
