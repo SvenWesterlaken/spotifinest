@@ -1,0 +1,97 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: restore-cache
+    image: drillster/drone-volume-cache
+    volumes:
+      - name: cache
+        path: /cache
+    settings:
+      restore: true
+      mount:
+        - ./app/node_modules
+    when:
+      branch: master
+      event: push
+  - name: restore-api-cache
+    image: drillster/drone-volume-cache
+    volumes:
+      - name: api-cache
+        path: /api_cache
+    settings:
+      restore: true
+      mount:
+        - ./api/node_modules
+    when:
+      branch: master
+      event: push
+
+  - name: build-app
+    image: node:11-alpine
+    user: root
+    commands:
+      - cd ./app
+      - npm install
+      - npm run build
+      - cd ..
+    when:
+      branch: master
+      event: push
+
+  - name: rebuild-cache
+    image: drillster/drone-volume-cache
+    volumes:
+      - name: cache
+        path: /cache
+    settings:
+      rebuild: true
+      mount:
+        - ./app/node_modules
+    when:
+      branch: master
+      event: push
+
+  - name: push-app-image
+    image: plugins/docker
+    settings:
+      repo:
+        from_secret: docker_repo_app
+      registry:
+        from_secret: docker_registry
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      cache_from: node:11-alpine
+      dockerfile: ./app
+    when:
+      branch: master
+      event: push
+
+  - name: push-api-image
+    image: plugins/docker
+    settings:
+      repo:
+        from_secret: docker_repo_api
+      registry:
+        from_secret: docker_registry
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      dockerfile: ./api
+    when:
+      branch: master
+      event: push
+
+volumes:
+  - name: cache
+    host:
+      path: /tmp/drone-cache
+
+trigger:
+  branch:
+    - master
