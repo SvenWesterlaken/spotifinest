@@ -16,21 +16,9 @@ steps:
     when:
       branch: master
       event: push
-  - name: restore-api-cache
-    image: drillster/drone-volume-cache
-    volumes:
-      - name: api-cache
-        path: /api_cache
-    settings:
-      restore: true
-      mount:
-        - ./api/node_modules
-    when:
-      branch: master
-      event: push
 
   - name: build-app
-    image: node:11-alpine
+    image: node:10-alpine
     user: root
     commands:
       - cd ./app
@@ -65,7 +53,7 @@ steps:
         from_secret: docker_username
       password:
         from_secret: docker_password
-      cache_from: node:11-alpine
+      cache_from: node:10-alpine
       dockerfile: ./app
     when:
       branch: master
