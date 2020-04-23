@@ -6,7 +6,7 @@ a<template lang="pug">
   error-container(:show="itemsUnavailable")
   bounce-loader(:loading="loading", color="#1db954")
   transition-group(name="tracklist", :duration="{ leave: 200 }", appear, tag="div").tracks-container
-    app-track(v-for="(track, index) in tracks", :key="`${time}_${track.id}`", :track="track", :index="index")
+    app-track(v-for="(track, index) in tracks", v-if="track", :key="`${time}_${track.id}`", :track="track", :index="index")
   back-to-top-button
 </template>
 

@@ -10,6 +10,12 @@ const app = express();
 
 app.use(parser.json());
 
+// ====================================================================================================================
+//
+// Login
+//
+// ====================================================================================================================
+
 app.get('/login', (req, res) => {
   const query_string = query.stringify({
     response_type: 'code',
@@ -20,6 +26,12 @@ app.get('/login', (req, res) => {
   res.append('Access-Control-Allow-Origin', '*');
   res.json({url: `https://accounts.spotify.com/authorize?${query_string}`});
 });
+
+// ====================================================================================================================
+//
+// Callback for spotify authentication
+//
+// ====================================================================================================================
 
 app.get('/callback', (req, res) => {
   const code = req.query.code || null
@@ -50,6 +62,22 @@ app.get('/callback', (req, res) => {
   });
 });
 
+// ====================================================================================================================
+//
+// Get user information
+//
+// ====================================================================================================================
+
+app.get('/user', (req, res) => {
+
+});
+
+// ====================================================================================================================
+//
+// Get most popular tracks or artists in given timerange
+//
+// ====================================================================================================================
+
 app.get('/:type/:time', (req, res, next) => {
   const type = req.params.type || '';
   const time = req.params.time || '';
@@ -58,33 +86,15 @@ app.get('/:type/:time', (req, res, next) => {
 
     let { api_token, refresh_token, expires_at } = req.query;
 
-
-    if (moment().isSameOrAfter(+expires_at)) {
-      const config = {
-        url: 'https://accounts.spotify.com/api/token',
-        method: 'post',
-        headers: {
-          'Authorization': `Basic ${Buffer.from(`${env.spotify_id}:${env.spotify_secret}`).toString('base64')}`
-        },
-        params: {
-          refresh_token,
-          grant_type: 'refresh_token'
-        }
-      }
-
-      axios.request(config).catch((err) => next(err)).then((response) => {
-        api_token = response.data.access_token;
-        expires_at = moment().add(response.data.expires_in, 'seconds').valueOf();
-        getInformation(res, next, type, time, api_token, refresh_token, expires_at);
-      });
-    } else {
-      getInformation(res, next, type, time, api_token, refresh_token, expires_at);
-    }
-
+    handleTokenRefresh(api_token, refresh_token, expires_at).then((r) => {
+      getInformation(res, next, type, time, r.api_token, r.refresh_token, r.expires_at);
+    });
   } else {
     next();
   }
 });
+
+// Help function for breaking sending the 'top' request
 
 const getInformation = (res, next, type, time_range, api_token, refresh_token, expires_at) => {
   const config = {
@@ -111,6 +121,34 @@ const getInformation = (res, next, type, time_range, api_token, refresh_token, e
       request_at: moment().add(1, 'hours').valueOf()
     });
 
+  });
+}
+
+const handleTokenRefresh = (api_token, refresh_token, expires_at) => {
+
+  if (moment().isSameOrAfter(+expires_at)) {
+
+    const config = {
+      url: 'https://accounts.spotify.com/api/token',
+      method: 'post',
+      headers: {
+        'Authorization': `Basic ${Buffer.from(`${env.spotify_id}:${env.spotify_secret}`).toString('base64')}`
+      },
+      params: {
+        refresh_token,
+        grant_type: 'refresh_token'
+      }
+    }
+
+    return axios.request(config).catch((err) => next(err)).then((response) => {
+      api_token = response.data.access_token;
+      expires_at = moment().add(response.data.expires_in, 'seconds').valueOf();
+      return { api_token, refresh_token, expires_at }
+    });
+  }
+
+  return new Promise(function(resolve, reject) {
+    resolve({ api_token, refresh_token, expires_at });
   });
 }
 
