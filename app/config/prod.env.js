@@ -4,5 +4,5 @@ module.exports = {
   TIME_SHORT: '"short_term"',
   TIME_MEDIUM: '"medium_term"',
   TIME_LONG: '"long_term"',
-  API_BASE_URL: '"https://api.spotifinest.svenwesterlaken.nl"'
+  API_BASE_URL: '"https://api.spotifinest.svenwesterlaken.com"'
 }
