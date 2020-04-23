@@ -55,6 +55,7 @@ steps:
         from_secret: docker_password
       cache_from: node:10-alpine
       dockerfile: ./app/Dockerfile
+      context: ./app
     when:
       branch: master
       event: push
@@ -71,6 +72,7 @@ steps:
       password:
         from_secret: docker_password
       dockerfile: ./api/Dockerfile
+      context: ./api
     when:
       branch: master
       event: push
